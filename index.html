@@ -393,32 +393,26 @@ const CASES = [
    ============================================================================ */
 const ROLES = {
  
-  // ---- EXAMPLE. Copy this whole block, rename the key, edit, then send ?for=thekey ----
-  "acme": {
-    company: "Acme Health",
-    logo: "logos/acme.svg",          // optional: drop the file in a /logos folder, OR use a full https:// URL
-    accent: "#C8442A",               // optional: match their brand colour
-    highlight: "twipla",             // optional: which case study to flag "Most relevant here"
-    fitTitle: "Why I'm right for Acme Health",   // optional: defaults to "Why I'm right for {company}"
-    fit: [
-      "You're scaling past your first product into a platform. I did exactly that at TWIPLA, repositioning a point tool into a category and doubling ARR in twelve months.",
-      "You need someone who builds the team and the system, not just the campaign. I've built three marketing functions from zero, most recently from 4 people to 18.",
-      "Healthtech is home turf. I'm at Semble now doing customer and lifecycle work inside a clinical-software business, so I'll understand your buyer from day one."
-    ],
-    footer: "Let's talk about <em>Acme's</em> next chapter."
-  },
+  /* ---- HOW TO ADD A NEW ROLE ----
+     Copy the whole "techtree" block below, rename the key (the bit in quotes),
+     edit the fields, save and push. Then send  yoursite.com/?for=yourkey
+     Any field you leave out just falls back to the default page.
+     You can have as many roles in here as you like; they all coexist.
+  ---------------------------------- */
  
-  // ---- a second example: different accent, no logo file ----
-  "beacon": {
-    company: "Beacon",
-    accent: "#2F6F6A",
-    highlight: "emerging",
+  "techtree": {
+    company: "TechTree",              // change to the actual firm name once you know it
+    // logo: "logos/techtree.svg",    // add a logo file (in a /logos folder) or a full https:// URL
+    accent: "#2A4D7C",                // navy guess for a legal/AI brand; change freely
+    highlight: "twipla",              // which case study gets the "Most relevant here" tag
+    fitTitle: "Why I'm right for this growth role",
     fit: [
-      "First marketing hire is the role I do best: positioning, the first GTM motion, and the systems your second and third hires inherit.",
-      "I've grown revenue from £75K to £15M as a founding marketer before, so I know how to make an early budget work hard.",
-      "I bring an AI-native operating model, orchestrating agents so a team of one or two performs like a team of five."
+      "I co-founded <b>Pioneerly</b>, an AI-native growth firm for law firms, so I already live in your exact world: turning legal expertise into demand and using agents to do the heavy lifting. Very few growth marketers will understand your buyer and your model as fast.",
+      "Turning a pipeline into a scalable machine is the work I keep doing. At TWIPLA I rebuilt onboarding and activation and stood up a multi-channel demand engine; at LUXHUB a website rebrand cut bounce 38% and grew page views 142%. Website, CRO, SEO, paid and lifecycle: I have owned all of it hands-on.",
+      "Your stack is already mine. I build in Webflow, run GA4 and HubSpot, and work daily in Claude and Cursor, orchestrating agents rather than just prompting them. AI-native is how I operate, not a line on a CV.",
+      "Persuasive copy is my foundation. I have a Creative Writing degree and cut my teeth as a content lead and copy editor, so the website messaging and CTAs you want sharpened are exactly where I am strongest."
     ],
-    footer: "Ready to be <em>Beacon's</em> first marketer."
+    footer: "Let's turn the pipeline into a <em>machine.</em>"
   },
  
 };
@@ -485,4 +479,3 @@ const ROLES = {
 </script>
 </body>
 </html>
- 
