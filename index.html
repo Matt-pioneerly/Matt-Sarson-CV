@@ -63,8 +63,9 @@ a{color:inherit}
 .brand b{color:var(--accent);font-weight:600}
 .preparedfor{
   font-size:12.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);
-  display:none;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  display:none;align-items:center;gap:10px;white-space:nowrap;
 }
+.preparedfor img{height:20px;width:auto;display:block}
 .topnav{display:flex;gap:22px;font-size:13.5px;letter-spacing:.04em}
 .topnav a{text-decoration:none;color:var(--muted);transition:color .2s}
 .topnav a:hover{color:var(--ink)}
@@ -185,6 +186,18 @@ section{padding:78px 0}
 .cares li{padding-left:26px;position:relative;color:#3a342e}
 .cares li::before{content:"";position:absolute;left:0;top:11px;width:11px;height:1px;background:var(--accent)}
  
+/* tailored "why I'm a fit" section */
+.fit-sec{padding:60px 0 6px}
+.fit-card{background:var(--accent-soft);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:8px;padding:40px 42px 38px}
+.fit-head{display:flex;align-items:flex-start;gap:18px;margin-bottom:26px;flex-wrap:wrap}
+.fit-kicker{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:10px}
+.fit-head .sec-title{font-size:clamp(24px,3.4vw,34px)}
+.fit-logo{height:34px;width:auto;margin-left:auto;display:none;object-fit:contain}
+.fit-list{list-style:none;display:grid;gap:16px}
+.fit-list li{padding-left:30px;position:relative;font-size:17px;color:#33302b;max-width:82ch;line-height:1.55}
+.fit-list li::before{content:"";position:absolute;left:0;top:13px;width:16px;height:2px;background:var(--accent)}
+@media(max-width:760px){.fit-card{padding:30px 24px}.fit-logo{margin-left:0}}
+ 
 /* footer */
 footer{background:var(--ink);color:#e9e3d8;padding:70px 0 50px;position:relative;z-index:1}
 footer h2{font-family:var(--serif);font-weight:500;font-size:clamp(30px,5vw,52px);line-height:1;margin-bottom:28px}
@@ -254,6 +267,22 @@ footer h2 em{font-style:italic;color:#f0a18f}
     <div class="stat"><div class="n">£500M<span>+</span></div><div class="l">in sales influenced</div></div>
   </div>
 </div>
+ 
+<!-- ============== WHY I'M A FIT (tailored; hidden until ?for= a role that has fit points) ============== -->
+<section id="fit" class="fit-sec" style="display:none">
+  <div class="wrap">
+    <div class="fit-card reveal">
+      <div class="fit-head">
+        <div>
+          <div class="fit-kicker">Tailored for this role</div>
+          <h2 class="sec-title" id="fitTitle">Why I'm a fit</h2>
+        </div>
+        <img id="fitLogo" class="fit-logo" alt="">
+      </div>
+      <ul class="fit-list" id="fitList"></ul>
+    </div>
+  </div>
+</section>
  
 <!-- ================= WORK ================= -->
 <section id="work">
@@ -364,21 +393,31 @@ const CASES = [
    ============================================================================ */
 const ROLES = {
  
-  // ---- EXAMPLE. Copy this block, rename the key, edit, and you're done. ----
+  // ---- EXAMPLE. Copy this whole block, rename the key, edit, then send ?for=thekey ----
   "acme": {
     company: "Acme Health",
-    pitch: "I've spent the last decade doing exactly what <b>Acme Health</b> needs next: turning an early product into a category, and building the team to scale it. Here's the relevant track record.",
-    accent: "#C8442A",          // optional - match their brand colour
-    highlight: "twipla",        // optional - which case study to flag as most relevant
+    logo: "logos/acme.svg",          // optional: drop the file in a /logos folder, OR use a full https:// URL
+    accent: "#C8442A",               // optional: match their brand colour
+    highlight: "twipla",             // optional: which case study to flag "Most relevant here"
+    fitTitle: "Why I'm right for Acme Health",   // optional: defaults to "Why I'm right for {company}"
+    fit: [
+      "You're scaling past your first product into a platform. I did exactly that at TWIPLA, repositioning a point tool into a category and doubling ARR in twelve months.",
+      "You need someone who builds the team and the system, not just the campaign. I've built three marketing functions from zero, most recently from 4 people to 18.",
+      "Healthtech is home turf. I'm at Semble now doing customer and lifecycle work inside a clinical-software business, so I'll understand your buyer from day one."
+    ],
     footer: "Let's talk about <em>Acme's</em> next chapter."
   },
  
-  // ---- another example with a different accent ----
+  // ---- a second example: different accent, no logo file ----
   "beacon": {
     company: "Beacon",
-    pitch: "First marketing hire is the role I do best. For <b>Beacon</b>, that means positioning, the first GTM motion, and the systems your second and third hires inherit.",
     accent: "#2F6F6A",
     highlight: "emerging",
+    fit: [
+      "First marketing hire is the role I do best: positioning, the first GTM motion, and the systems your second and third hires inherit.",
+      "I've grown revenue from £75K to £15M as a founding marketer before, so I know how to make an early budget work hard.",
+      "I bring an AI-native operating model, orchestrating agents so a team of one or two performs like a team of five."
+    ],
     footer: "Ready to be <em>Beacon's</em> first marketer."
   },
  
@@ -413,9 +452,18 @@ const ROLES = {
  
   if(role){
     const pf = document.getElementById("preparedfor");
-    pf.textContent = "Prepared for " + role.company;
-    pf.style.display = "block";
+    pf.innerHTML = (role.logo ? `<img src="${role.logo}" alt="${role.company} logo">` : "") + `<span>Prepared for ${role.company}</span>`;
+    pf.style.display = "flex";
+ 
     if(role.pitch){ const p=document.getElementById("pitch"); p.innerHTML=role.pitch; p.style.display="block"; }
+ 
+    if(role.fit && role.fit.length){
+      document.getElementById("fitTitle").textContent = role.fitTitle || ("Why I'm right for " + role.company);
+      document.getElementById("fitList").innerHTML = role.fit.map(p=>`<li>${p}</li>`).join("");
+      if(role.logo){ const fl=document.getElementById("fitLogo"); fl.src=role.logo; fl.alt=role.company+" logo"; fl.style.display="block"; }
+      document.getElementById("fit").style.display="block";
+    }
+ 
     if(role.footer){ document.getElementById("footerline").innerHTML = role.footer; }
     document.title = "Matt Sarson · for " + role.company;
   }
@@ -437,3 +485,4 @@ const ROLES = {
 </script>
 </body>
 </html>
+ 
