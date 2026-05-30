@@ -1,0 +1,439 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Matt Sarson · Marketing Leader</title>
+<meta name="description" content="Matt Sarson, marketing leader and founding/first marketer. B2B SaaS across healthtech, fintech, martech and legal.">
+ 
+<!-- ============================================================
+     FONTS
+     ============================================================ -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,900&family=Archivo:wght@400;500;600&display=swap" rel="stylesheet">
+ 
+<style>
+/* ============================================================
+   THEME TOKENS  - change the accent here, or per-role below
+   ============================================================ */
+:root{
+  --paper:#F4F1EA;
+  --paper-2:#FBF9F4;
+  --ink:#1A1714;
+  --muted:#6F665B;
+  --line:rgba(26,23,20,.14);
+  --accent:#C8442A;          /* default accent (per-role override in JS) */
+  --accent-soft:rgba(200,68,42,.10);
+  --maxw:1120px;
+  --serif:"Fraunces",Georgia,serif;
+  --sans:"Archivo",-apple-system,BlinkMacSystemFont,sans-serif;
+}
+ 
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--sans);
+  font-size:17px;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+/* subtle paper grain */
+body::before{
+  content:"";position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.5;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.035'/%3E%3C/svg%3E");
+}
+.wrap{position:relative;z-index:1;max-width:var(--maxw);margin:0 auto;padding:0 32px}
+ 
+a{color:inherit}
+::selection{background:var(--accent);color:#fff}
+ 
+/* ---------- running dossier header ---------- */
+.topbar{
+  position:sticky;top:0;z-index:20;
+  background:rgba(244,241,234,.82);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+}
+.topbar .wrap{display:flex;align-items:center;justify-content:space-between;height:58px;gap:16px}
+.brand{font-family:var(--serif);font-weight:600;letter-spacing:.01em;font-size:18px}
+.brand b{color:var(--accent);font-weight:600}
+.preparedfor{
+  font-size:12.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);
+  display:none;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.topnav{display:flex;gap:22px;font-size:13.5px;letter-spacing:.04em}
+.topnav a{text-decoration:none;color:var(--muted);transition:color .2s}
+.topnav a:hover{color:var(--ink)}
+@media(max-width:720px){.topnav{display:none}}
+ 
+/* ---------- hero ---------- */
+.hero{padding:74px 0 38px}
+.kicker{
+  font-size:12.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);
+  font-weight:600;margin-bottom:26px;display:flex;align-items:center;gap:12px;
+}
+.kicker::before{content:"";width:34px;height:1px;background:var(--accent);display:inline-block}
+.hero-grid{display:grid;grid-template-columns:1.45fr .85fr;gap:54px;align-items:end}
+@media(max-width:860px){.hero-grid{grid-template-columns:1fr;gap:36px}}
+ 
+h1{
+  font-family:var(--serif);font-weight:500;font-size:clamp(52px,8vw,104px);
+  line-height:.92;letter-spacing:-.02em;margin-bottom:24px;
+}
+h1 em{font-style:italic;color:var(--accent)}
+.lede{font-size:clamp(19px,2.3vw,23px);max-width:34ch;color:#39332d;line-height:1.5}
+.pitch{
+  margin-top:22px;padding:18px 22px;border-left:2px solid var(--accent);
+  background:var(--accent-soft);font-size:16.5px;max-width:48ch;display:none;border-radius:2px;
+}
+.pitch b{font-weight:600}
+ 
+.cta{display:flex;flex-wrap:wrap;gap:14px;margin-top:34px}
+.btn{
+  font-family:var(--sans);font-size:14.5px;font-weight:500;letter-spacing:.02em;
+  text-decoration:none;padding:13px 22px;border-radius:40px;border:1px solid var(--ink);
+  transition:transform .18s,background .18s,color .18s;display:inline-flex;align-items:center;gap:9px;
+}
+.btn.primary{background:var(--ink);color:var(--paper)}
+.btn.primary:hover{background:var(--accent);border-color:var(--accent);transform:translateY(-2px)}
+.btn.ghost:hover{background:var(--ink);color:var(--paper);transform:translateY(-2px)}
+ 
+/* portrait */
+.portrait{position:relative}
+.portrait .frame{
+  position:relative;aspect-ratio:4/5;border-radius:4px;overflow:hidden;
+  background:linear-gradient(150deg,#e7e1d4,#d8d0c0);border:1px solid var(--line);
+  box-shadow:18px 22px 50px -28px rgba(26,23,20,.5);
+}
+.portrait img{width:100%;height:100%;object-fit:cover;display:block}
+.portrait .placeholder{
+  position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  flex-direction:column;gap:8px;color:var(--muted);text-align:center;padding:20px;font-size:13px;letter-spacing:.04em;
+}
+.portrait .tag{
+  position:absolute;bottom:-14px;left:-14px;background:var(--accent);color:#fff;
+  font-size:12px;letter-spacing:.14em;text-transform:uppercase;padding:9px 15px;border-radius:3px;
+  box-shadow:0 8px 20px -8px rgba(200,68,42,.7);
+}
+ 
+/* ---------- stat strip ---------- */
+.stats{border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-top:56px}
+.stats .wrap{display:grid;grid-template-columns:repeat(4,1fr);gap:0}
+@media(max-width:720px){.stats .wrap{grid-template-columns:repeat(2,1fr)}}
+.stat{padding:30px 26px 28px;border-right:1px solid var(--line)}
+.stat:last-child{border-right:0}
+@media(max-width:720px){.stat:nth-child(2n){border-right:0}.stat:nth-child(-n+2){border-bottom:1px solid var(--line)}}
+.stat .n{font-family:var(--serif);font-size:42px;font-weight:500;line-height:1;letter-spacing:-.02em}
+.stat .n span{color:var(--accent)}
+.stat .l{margin-top:9px;font-size:13.5px;color:var(--muted);letter-spacing:.02em}
+ 
+/* ---------- sections ---------- */
+section{padding:78px 0}
+.sec-head{display:flex;align-items:baseline;gap:18px;margin-bottom:42px}
+.sec-no{font-family:var(--serif);font-size:15px;color:var(--accent)}
+.sec-title{font-family:var(--serif);font-size:clamp(28px,4vw,40px);font-weight:500;letter-spacing:-.01em}
+ 
+/* video */
+.video-frame{
+  position:relative;aspect-ratio:16/9;border-radius:6px;overflow:hidden;border:1px solid var(--line);
+  background:#16110d;box-shadow:0 30px 70px -40px rgba(26,23,20,.7);max-width:880px;
+}
+.video-frame iframe,.video-frame video{position:absolute;inset:0;width:100%;height:100%;border:0}
+.video-frame .vph{
+  position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:14px;color:#cfc6b6;text-align:center;padding:24px;
+}
+.video-frame .play{
+  width:66px;height:66px;border-radius:50%;border:1.5px solid #cfc6b6;display:flex;align-items:center;justify-content:center;
+}
+.video-frame .play::after{content:"";border-left:16px solid #cfc6b6;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px}
+.video-note{margin-top:16px;font-size:14px;color:var(--muted);max-width:60ch}
+ 
+/* case studies */
+.cases{display:grid;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:6px;overflow:hidden}
+.case{
+  background:var(--paper-2);padding:34px 32px;display:grid;grid-template-columns:64px 1fr auto;gap:26px;align-items:start;
+  transition:background .25s;position:relative;
+}
+.case:hover{background:#fff}
+.case .cno{font-family:var(--serif);font-size:30px;color:var(--accent);line-height:1}
+.case .ctitle{font-family:var(--serif);font-size:24px;font-weight:500;margin-bottom:4px}
+.case .crole{font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:14px}
+.case .cbody{max-width:62ch;color:#3a342e}
+.case .cmetric{text-align:right;min-width:150px}
+.case .cmetric .big{font-family:var(--serif);font-size:30px;font-weight:500;letter-spacing:-.01em;line-height:1.05}
+.case .cmetric .sm{font-size:12.5px;color:var(--muted);margin-top:6px;letter-spacing:.03em}
+.case .relevant{
+  display:inline-block;margin-bottom:12px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+  color:#fff;background:var(--accent);padding:4px 10px;border-radius:3px;
+}
+@media(max-width:760px){
+  .case{grid-template-columns:1fr;gap:10px;padding:28px 24px}
+  .case .cmetric{text-align:left;border-top:1px solid var(--line);padding-top:14px;margin-top:4px}
+}
+ 
+/* approach / about split */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:54px}
+@media(max-width:760px){.split{grid-template-columns:1fr;gap:34px}}
+.split p{margin-bottom:18px;color:#3a342e}
+.split p:last-child{margin-bottom:0}
+.cares{list-style:none;display:grid;gap:14px}
+.cares li{padding-left:26px;position:relative;color:#3a342e}
+.cares li::before{content:"";position:absolute;left:0;top:11px;width:11px;height:1px;background:var(--accent)}
+ 
+/* footer */
+footer{background:var(--ink);color:#e9e3d8;padding:70px 0 50px;position:relative;z-index:1}
+footer h2{font-family:var(--serif);font-weight:500;font-size:clamp(30px,5vw,52px);line-height:1;margin-bottom:28px}
+footer h2 em{font-style:italic;color:#f0a18f}
+.flinks{display:flex;flex-wrap:wrap;gap:16px;margin-top:8px}
+.flink{
+  text-decoration:none;color:#e9e3d8;border:1px solid rgba(233,227,216,.3);border-radius:40px;
+  padding:12px 22px;font-size:14.5px;transition:all .2s;display:inline-flex;gap:9px;align-items:center;
+}
+.flink:hover{background:#e9e3d8;color:var(--ink)}
+.fmeta{margin-top:46px;padding-top:24px;border-top:1px solid rgba(233,227,216,.18);font-size:13px;color:#9c9484;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+ 
+/* reveal animation */
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1)}
+.reveal.in{opacity:1;transform:none}
+.hero .reveal{transition-delay:var(--d,0s)}
+@media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}}
+</style>
+</head>
+<body>
+ 
+<!-- ================= TOP BAR ================= -->
+<header class="topbar">
+  <div class="wrap">
+    <div class="brand">Matt <b>Sarson</b></div>
+    <div class="preparedfor" id="preparedfor"></div>
+    <nav class="topnav">
+      <a href="#work">Work</a>
+      <a href="#video">Video</a>
+      <a href="#approach">Approach</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+ 
+<!-- ================= HERO ================= -->
+<section class="hero">
+  <div class="wrap">
+    <div class="kicker reveal" style="--d:0s">Marketing leader · Founding / first marketer</div>
+    <div class="hero-grid">
+      <div>
+        <h1 class="reveal" style="--d:.08s">I build startup<br>marketing from <em>zero.</em></h1>
+        <p class="lede reveal" style="--d:.16s">Team, systems, positioning and the revenue engine, across healthtech, fintech, martech and legal. CMO and CMPO background, happiest as the first marketer in.</p>
+        <div class="pitch reveal" id="pitch" style="--d:.24s"></div>
+        <div class="cta reveal" style="--d:.3s">
+          <a class="btn primary" id="cvlink" href="Matt-Sarson-CV.pdf" download>Download CV ↓</a>
+          <a class="btn ghost" href="https://www.linkedin.com/in/matt-sarson/" target="_blank" rel="noopener">LinkedIn</a>
+          <a class="btn ghost" href="#contact">Get in touch</a>
+        </div>
+      </div>
+      <div class="portrait reveal" style="--d:.22s">
+        <div class="frame">
+          <img src="matt.jpg" alt="Matt Sarson">
+        </div>
+        <span class="tag">Warwick / London</span>
+      </div>
+    </div>
+  </div>
+</section>
+ 
+<!-- ================= STATS ================= -->
+<div class="stats reveal">
+  <div class="wrap">
+    <div class="stat"><div class="n">15<span>+</span></div><div class="l">years in B2B SaaS marketing</div></div>
+    <div class="stat"><div class="n">4</div><div class="l">company rebrands led</div></div>
+    <div class="stat"><div class="n">3</div><div class="l">marketing teams built from zero</div></div>
+    <div class="stat"><div class="n">£500M<span>+</span></div><div class="l">in sales influenced</div></div>
+  </div>
+</div>
+ 
+<!-- ================= WORK ================= -->
+<section id="work">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-no">01</span>
+      <h2 class="sec-title">Selected work</h2>
+    </div>
+    <div class="cases reveal" id="cases"><!-- rendered from JS --></div>
+  </div>
+</section>
+ 
+<!-- ================= VIDEO ================= -->
+<section id="video">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-no">02</span>
+      <h2 class="sec-title">A 90-second hello</h2>
+    </div>
+    <div class="video-frame reveal">
+      <!-- REPLACE: paste a Loom / YouTube / Vimeo embed, or a self-hosted <video src="intro.mp4" controls poster="poster.jpg"></video> -->
+      <div class="vph">
+        <div class="play"></div>
+        <div>Drop your video embed here</div>
+      </div>
+    </div>
+    <p class="video-note reveal">Tip: keep it under two minutes, talk to the specific role, and end on what you'd do in the first 90 days. A Loom is perfectly fine; personality beats production value.</p>
+  </div>
+</section>
+ 
+<!-- ================= APPROACH ================= -->
+<section id="approach">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-no">03</span>
+      <h2 class="sec-title">How I work</h2>
+    </div>
+    <div class="split">
+      <div class="reveal">
+        <p>I operate at the intersection of customer, product and growth, helping startups define their position, build the right systems, and drive results that compound.</p>
+        <p>Increasingly that build is AI-native. I design AI-powered growth systems and orchestrate agents to carry the repetitive load: research and enrichment, content production, lifecycle and reporting. It lets a small team operate like a much larger one, which is exactly what an early-stage company needs from its first marketer.</p>
+        <p>The rest of the full stack still applies: rebrands and category shifts, GTM launches, demand and ABM programmes, product marketing, and the teams to run it all. Before marketing I spent my early career in the charity sector and international development, which keeps pulling me back to purpose-driven work. I'm a builder by instinct, most useful when I can set the strategy and then actually build the thing.</p>
+      </div>
+      <div class="reveal">
+        <ul class="cares">
+          <li>Work that flows: teams that move fast but think deeply.</li>
+          <li>Small teams with outsized leverage, agents doing the repetitive work.</li>
+          <li>Brand and performance informing each other, not competing.</li>
+          <li>Marketing treated as a product in its own right.</li>
+          <li>Systems that outlast the campaign that created them.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+ 
+<!-- ================= FOOTER / CONTACT ================= -->
+<footer id="contact">
+  <div class="wrap">
+    <h2 id="footerline">Let's build something <em>worth remembering.</em></h2>
+    <div class="flinks">
+      <a class="flink" href="mailto:matt.sarson@gmail.com">matt.sarson@gmail.com</a>
+      <a class="flink" href="https://www.linkedin.com/in/matt-sarson/" target="_blank" rel="noopener">LinkedIn ↗</a>
+      <a class="flink" id="cvlink2" href="Matt-Sarson-CV.pdf" download>Download CV ↓</a>
+    </div>
+    <div class="fmeta">
+      <span>Matt Sarson · Marketing leader, B2B SaaS</span>
+      <span>Warwick / London, UK</span>
+    </div>
+  </div>
+</footer>
+ 
+<script>
+/* ============================================================================
+   1) CASE STUDIES  - edit the text/metrics here, no HTML needed.
+      'key' is used by the per-role config below to flag "most relevant".
+   ============================================================================ */
+const CASES = [
+  { key:"twipla",
+    title:"TWIPLA",
+    role:"Chief Marketing Officer",
+    body:"Repositioned a plugin tool into a full \u201Cwebsite intelligence platform\u201D, with a new name, voice and GTM, and built the global team from 4 to 18 across marketing, customer and sales. Built a multi-channel ABM engine and lifted free-user activation.",
+    big:"£750K → £1.5M", sm:"ARR doubled in 12 months" },
+ 
+  { key:"luxhub",
+    title:"LUXHUB",
+    role:"Head of Marketing",
+    body:"Ran the company's first major ABM campaign, targeting 140 banks for a compliance API, plus a full rebrand and the launch of an Open Finance API marketplace.",
+    big:"€500K ARR", sm:"from a €15K ABM pilot" },
+ 
+  { key:"talkwalker",
+    title:"Talkwalker",
+    role:"Marketing Lead, UK & Nordics + Interim Brand",
+    body:"Took over a stalled global rebrand and delivered it on time, repositioning the company as an enterprise-grade platform ahead of acquisition. Built an influencer-led content engine with YouGov, HubSpot and Hootsuite.",
+    big:"+142%", sm:"UK ARR, year on year" },
+ 
+  { key:"emerging",
+    title:"Emerging Property",
+    role:"VP Marketing (first marketing hire)",
+    body:"First marketing hire. Built the function and a team of 12 from scratch, with a segmented investor content strategy that grew repeat business from 8% to 25%.",
+    big:"£75K → £15M", sm:"revenue · £500M+ invested" },
+];
+ 
+/* ============================================================================
+   2) PER-ROLE CONFIG  - this is the bit you customise per application.
+      Add an entry, then send the link  yoursite.com/?for=THEKEY
+      Anything you omit falls back to the default page.
+   ============================================================================ */
+const ROLES = {
+ 
+  // ---- EXAMPLE. Copy this block, rename the key, edit, and you're done. ----
+  "acme": {
+    company: "Acme Health",
+    pitch: "I've spent the last decade doing exactly what <b>Acme Health</b> needs next: turning an early product into a category, and building the team to scale it. Here's the relevant track record.",
+    accent: "#C8442A",          // optional - match their brand colour
+    highlight: "twipla",        // optional - which case study to flag as most relevant
+    footer: "Let's talk about <em>Acme's</em> next chapter."
+  },
+ 
+  // ---- another example with a different accent ----
+  "beacon": {
+    company: "Beacon",
+    pitch: "First marketing hire is the role I do best. For <b>Beacon</b>, that means positioning, the first GTM motion, and the systems your second and third hires inherit.",
+    accent: "#2F6F6A",
+    highlight: "emerging",
+    footer: "Ready to be <em>Beacon's</em> first marketer."
+  },
+ 
+};
+ 
+/* ============================================================================
+   3) WIRING  - you shouldn't need to touch anything below.
+   ============================================================================ */
+(function(){
+  // render case studies
+  const wrap = document.getElementById("cases");
+  const params = new URLSearchParams(location.search);
+  const role = ROLES[(params.get("for")||"").toLowerCase().trim()] || null;
+ 
+  if(role && role.accent){
+    document.documentElement.style.setProperty("--accent", role.accent);
+    document.documentElement.style.setProperty("--accent-soft", hexToSoft(role.accent));
+  }
+ 
+  wrap.innerHTML = CASES.map((c,i)=>{
+    const flag = (role && role.highlight===c.key)
+      ? `<span class="relevant">Most relevant here</span><br>` : "";
+    const n = String(i+1).padStart(2,"0");
+    return `<article class="case">
+      <div class="cno">${n}</div>
+      <div><div class="ctitle">${flag}${c.title}</div>
+        <div class="crole">${c.role}</div>
+        <div class="cbody">${c.body}</div></div>
+      <div class="cmetric"><div class="big">${c.big}</div><div class="sm">${c.sm}</div></div>
+    </article>`;
+  }).join("");
+ 
+  if(role){
+    const pf = document.getElementById("preparedfor");
+    pf.textContent = "Prepared for " + role.company;
+    pf.style.display = "block";
+    if(role.pitch){ const p=document.getElementById("pitch"); p.innerHTML=role.pitch; p.style.display="block"; }
+    if(role.footer){ document.getElementById("footerline").innerHTML = role.footer; }
+    document.title = "Matt Sarson · for " + role.company;
+  }
+ 
+  function hexToSoft(hex){
+    const h=hex.replace("#","");
+    const r=parseInt(h.substring(0,2),16),g=parseInt(h.substring(2,4),16),b=parseInt(h.substring(4,6),16);
+    return `rgba(${r},${g},${b},.10)`;
+  }
+ 
+  // scroll reveal
+  const io = new IntersectionObserver((es)=>es.forEach(e=>{
+    if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target);}
+  }),{threshold:.12});
+  document.querySelectorAll(".reveal").forEach(el=>io.observe(el));
+  // fire hero immediately
+  document.querySelectorAll(".hero .reveal, .topbar .reveal").forEach(el=>el.classList.add("in"));
+})();
+</script>
+</body>
+</html>
