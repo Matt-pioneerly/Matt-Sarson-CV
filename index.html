@@ -198,6 +198,17 @@ section{padding:78px 0}
 .fit-list li::before{content:"";position:absolute;left:0;top:13px;width:16px;height:2px;background:var(--accent)}
 @media(max-width:760px){.fit-card{padding:30px 24px}.fit-logo{margin-left:0}}
  
+/* tailored "first moves" / teardown section */
+.plan-sec{padding:14px 0 6px}
+.plan-intro{color:var(--muted);max-width:70ch;margin:-26px 0 32px;font-size:15.5px}
+.plan-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:8px;overflow:hidden}
+@media(max-width:760px){.plan-grid{grid-template-columns:1fr}}
+.plan-item{background:var(--paper-2);padding:28px 30px;display:flex;gap:18px;align-items:flex-start;transition:background .25s}
+.plan-item:hover{background:#fff}
+.plan-item .pn{font-family:var(--serif);font-size:26px;color:var(--accent);line-height:1;min-width:34px}
+.plan-item .pmove{font-family:var(--serif);font-size:19px;font-weight:500;margin-bottom:7px;line-height:1.25}
+.plan-item .pwhy{font-size:15px;color:#4a443d;line-height:1.5}
+ 
 /* footer */
 footer{background:var(--ink);color:#e9e3d8;padding:70px 0 50px;position:relative;z-index:1}
 footer h2{font-family:var(--serif);font-weight:500;font-size:clamp(30px,5vw,52px);line-height:1;margin-bottom:28px}
@@ -281,6 +292,18 @@ footer h2 em{font-style:italic;color:#f0a18f}
       </div>
       <ul class="fit-list" id="fitList"></ul>
     </div>
+  </div>
+</section>
+ 
+<!-- ============== FIRST MOVES (tailored; hidden until a role has a plan) ============== -->
+<section id="plan" class="plan-sec" style="display:none">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-no">◆</span>
+      <h2 class="sec-title" id="planTitle">Where I'd start</h2>
+    </div>
+    <p class="plan-intro reveal" id="planIntro"></p>
+    <div class="plan-grid reveal" id="planGrid"></div>
   </div>
 </section>
  
@@ -396,7 +419,9 @@ const ROLES = {
   /* ---- HOW TO ADD A NEW ROLE ----
      Copy the whole "techtree" block below, rename the key (the bit in quotes),
      edit the fields, save and push. Then send  yoursite.com/?for=yourkey
-     Any field you leave out just falls back to the default page.
+     Any field you leave out just falls back to the default page:
+       fit  = the "Why I'm right" bullet points
+       plan = the "Where I'd start" first-moves cards (leave it out to hide that section)
      You can have as many roles in here as you like; they all coexist.
   ---------------------------------- */
  
@@ -411,6 +436,18 @@ const ROLES = {
       "Turning a pipeline into a scalable machine is the work I keep doing. At TWIPLA I rebuilt onboarding and activation and stood up a multi-channel demand engine; at LUXHUB a website rebrand cut bounce 38% and grew page views 142%. Website, CRO, SEO, paid and lifecycle: I have owned all of it hands-on.",
       "Your stack is already mine. I build in Webflow, run GA4 and HubSpot, and work daily in Claude and Cursor, orchestrating agents rather than just prompting them. AI-native is how I operate, not a line on a CV.",
       "Persuasive copy is my foundation. I have a Creative Writing degree and cut my teeth as a content lead and copy editor, so the website messaging and CTAs you want sharpened are exactly where I am strongest."
+    ],
+    planTitle: "Where I'd start",
+    planIntro: "First things I'd pressure-test, then refine once I'm in your analytics. Not a finished plan, a sign of how I think.",
+    plan: [
+      { move:"Pick one buyer and aim the site at them",
+        why:"Selling to RE private equity, funds and corporates at once dilutes the message. I'd lead with the sharpest ICP so the homepage converts instead of hedging." },
+      { move:"Make the site the conversion engine",
+        why:"Rebuild the homepage and key landing pages around one clear action, with proof and speed, then run CRO tests on the hero, CTAs and signup flow." },
+      { move:"Build a channel that compounds",
+        why:"SEO and content around the exact decisions your buyers face, plus a lifecycle nurture, builds pipeline that doesn't switch off when paid does. Layer paid on top for speed." },
+      { move:"Wire up attribution on day one",
+        why:"Clean GA4 and source tracking so every early pound is accountable and we double down on what actually drives qualified conversations." }
     ],
     footer: "Let's turn the pipeline into a <em>machine.</em>"
   },
@@ -458,6 +495,16 @@ const ROLES = {
       document.getElementById("fit").style.display="block";
     }
  
+    if(role.plan && role.plan.length){
+      document.getElementById("planTitle").textContent = role.planTitle || "Where I'd start";
+      const intro = document.getElementById("planIntro");
+      if(role.planIntro){ intro.textContent = role.planIntro; } else { intro.style.display="none"; }
+      document.getElementById("planGrid").innerHTML = role.plan.map((p,i)=>
+        `<div class="plan-item"><div class="pn">${i+1}</div><div><div class="pmove">${p.move}</div><div class="pwhy">${p.why}</div></div></div>`
+      ).join("");
+      document.getElementById("plan").style.display="block";
+    }
+ 
     if(role.footer){ document.getElementById("footerline").innerHTML = role.footer; }
     document.title = "Matt Sarson · for " + role.company;
   }
@@ -479,3 +526,4 @@ const ROLES = {
 </script>
 </body>
 </html>
+ 
