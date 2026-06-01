@@ -237,7 +237,7 @@ footer h2 em{font-style:italic;color:#f0a18f}
     <div class="preparedfor" id="preparedfor"></div>
     <nav class="topnav">
       <a href="#work">Work</a>
-      <a href="#video">Video</a>
+      <a href="#video" id="navVideo" style="display:none">Video</a>
       <a href="#approach">Approach</a>
       <a href="#contact">Contact</a>
     </nav>
@@ -318,21 +318,15 @@ footer h2 em{font-style:italic;color:#f0a18f}
   </div>
 </section>
  
-<!-- ================= VIDEO ================= -->
-<section id="video">
+<!-- ================= VIDEO (per-role; hidden until a role provides a video) ================= -->
+<section id="video" style="display:none">
   <div class="wrap">
     <div class="sec-head reveal">
       <span class="sec-no">02</span>
-      <h2 class="sec-title">A 90-second hello</h2>
+      <h2 class="sec-title" id="videoTitle">A 90-second hello</h2>
     </div>
-    <div class="video-frame reveal">
-      <!-- REPLACE: paste a Loom / YouTube / Vimeo embed, or a self-hosted <video src="intro.mp4" controls poster="poster.jpg"></video> -->
-      <div class="vph">
-        <div class="play"></div>
-        <div>Drop your video embed here</div>
-      </div>
-    </div>
-    <p class="video-note reveal">Tip: keep it under two minutes, talk to the specific role, and end on what you'd do in the first 90 days. A Loom is perfectly fine; personality beats production value.</p>
+    <div class="video-frame reveal" id="videoFrame"></div>
+    <p class="video-note reveal" id="videoNote">Recorded for this role.</p>
   </div>
 </section>
  
@@ -394,7 +388,7 @@ const CASES = [
     title:"LUXHUB",
     role:"Head of Marketing",
     body:"Ran the company's first major ABM campaign, targeting 140 banks for a compliance API, plus a full rebrand and the launch of an Open Finance API marketplace.",
-    big:"€500K ARR", sm:"from a €15K ABM pilot" },
+    big:"€500K ARR", sm:"from a €15K pilot · Benelux" },
  
   { key:"talkwalker",
     title:"Talkwalker",
@@ -457,10 +451,12 @@ const ROLES = {
     accent: "#2C6E6A",                 // clinical teal guess; change to their brand colour
     highlight: "twipla",
     fitTitle: "Why I'm built for this one",
+    video: "intro-clinicops.mp4",        // self-hosted file in the repo root (or a YouTube/Loom/Vimeo embed URL)
+    videoTitle: "A hello, recorded for you",
     fit: [
       "This is my world right now. I'm at Semble marketing clinic software, so I already know the clinician and clinic-group buyer, the multi-site complexity, and exactly why this category is winnable.",
       "Founding-marketer is the work I do best. I was first marketing hire at Emerging Property, growing it from £75K to £15M, and as CMO at TWIPLA I built the team to 18 and reported into the exec. Building the function from early stages is home ground.",
-      "I've already scaled across your markets. I ran marketing as a CMO based in Munich for DACH, drove revenue and partnerships across the US, UK and MENA, and turned a €15K ABM pilot at LUXHUB into close to €500K ARR. New-market entry, enterprise ABM and partnerships are familiar work, not a stretch.",
+      "I've already scaled across your markets. I ran marketing as a CMO based in Munich for DACH, drove revenue and partnerships across the US, UK and MENA, and turned a €15K ABM pilot at LUXHUB into close to €500K ARR across Benelux. New-market entry, enterprise ABM and partnerships are familiar work, not a stretch.",
       "Your AI bar is mine. I co-founded Pioneerly building agent-driven growth systems, I work in Claude, Cursor and n8n daily, and I bring the whole team along rather than leaving the tools to one person. That matches your 'built agents yourself, drove team adoption' line almost word for word."
     ],
     planTitle: "Where I'd start",
@@ -529,6 +525,21 @@ const ROLES = {
         `<div class="plan-item"><div class="pn">${i+1}</div><div><div class="pmove">${p.move}</div><div class="pwhy">${p.why}</div></div></div>`
       ).join("");
       document.getElementById("plan").style.display="block";
+    }
+ 
+    if(role.video){
+      if(role.videoTitle){ document.getElementById("videoTitle").textContent = role.videoTitle; }
+      const frame = document.getElementById("videoFrame");
+      const isFile = /\.(mp4|webm|mov|m4v)(\?|$)/i.test(role.video);
+      if(isFile){
+        frame.innerHTML = `<video src="${role.video}" controls playsinline preload="metadata"${role.poster ? ` poster="${role.poster}"` : ""}></video>`;
+      } else {
+        frame.innerHTML = `<iframe src="${role.video}" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>`;
+      }
+      if(role.videoNote){ document.getElementById("videoNote").textContent = role.videoNote; }
+      else { document.getElementById("videoNote").style.display = "none"; }
+      document.getElementById("video").style.display = "block";
+      const nv = document.getElementById("navVideo"); if(nv){ nv.style.display = "inline"; }
     }
  
     if(role.footer){ document.getElementById("footerline").innerHTML = role.footer; }
